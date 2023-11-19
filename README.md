@@ -1,3 +1,3 @@
-# JS-arnabfromjec05
+# LLD-arnabfromjec05
 
-For JavaScript related stuffs
+Repository for Low level design problems
