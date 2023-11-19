@@ -1,0 +1,6 @@
+Decorator Pattern
+
+A decorator pattern is a behavioural pattern that adds additional functionality to an object dynamically at runtime. A decorator wraps an object with additional behaviour without affecting other objects of the same type. 
+
+The classes in the input output streams in Java use the decorator pattern to read and write files.	
+

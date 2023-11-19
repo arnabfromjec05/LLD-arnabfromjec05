@@ -1,0 +1,41 @@
+Why design pattern?
+
+1. Capture design experience
+2. Promote re-use without reinventing the wheel
+3. Define the system structure structure better and more future proof and incoming requirements
+4. Provide a set lanes, i.e. on which developers can communicate
+
+GOF Patterns
+-> Creational patterns : Ways/manners to instantiate object 
+	Singleton
+	Factory
+	Abstract Factory
+	Builder
+	Prototype
+
+-> Structural patterns : manner to define relation among classes
+	Adapter
+	Bridge
+	Flyweight
+	Decorator
+	Proxy
+
+-> Behavioral patterns : How communication between classes and objects
+	Command
+	Observer
+	Interpreter
+	Template method
+	Visitor
+
+
+In JAVA generally applications follow this structure:
+
+	Presentation layer	Integration layer
+			|				|
+			v  				v
+			Service layer
+				|
+				v
+			Data access layer
+
+

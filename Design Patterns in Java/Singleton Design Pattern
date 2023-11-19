@@ -1,0 +1,53 @@
+Singleton Design Pattern
+
+Use cases:
+1. PropertyReader: Which can read the properties from a file. Application needs only one object of this, because creating many will consume more memory.
+2. Logger: ILog -> TelemetryLogger
+				-> FileLogger
+				-> ConsoleLogger 
+
+				can contain methods as shown below and logs to different channels and use corresponding concrete classes like FileLogger logs to a file.
+
+				interface ILog {
+					logVerbose();
+					logInfo();
+					logWarning();
+					logError();
+				}
+
+3. Data source class in JDBC API: Responsible for maintaining a connection pool and giving a connection from the pool to our application classes.
+
+
+ex.
+
+public class DateUtil implements Serializable,Cloneable {
+
+	private static final long serialVersionUID = 1L;
+
+	private static volatile DateUtil instance;
+
+	private DateUtil() {
+
+	}
+
+	public static DateUtil getInstance() {
+		if (instance == null) {
+			synchronized (DateUtil.class) {
+				if (instance == null) {
+					instance = new DateUtil();
+				}
+			}
+		}
+		return instance;
+	}
+
+	protected Object readResolve() {
+		return instance;
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
+	}
+
+}

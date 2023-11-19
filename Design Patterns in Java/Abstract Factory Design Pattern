@@ -1,0 +1,59 @@
+Abstract Factory Design pattern
+
+It simply creates the factory we need. when we have multiple factories we see in our application.
+So simply Its a factory of factories.
+
+public class DaoFactoryProducer {
+	public static IDaoFactory produce(String factoryType) {
+		IDaoFactory daf = null;
+		if (factoryType.equals("xml")) {
+			daf = new XMLDaoFactory();
+		} else if (factoryType.equals("db")) {
+			daf = new DBDaoFactory();
+		}
+		return daf;
+	}
+}
+
+interface IDaoFactory {
+	getDao(String DaoType);
+}
+
+class XMLDaoFactory implements IDaoFactory {
+	public IDao getDao(String DaoType) {
+		IDao dao = null;
+		if (DaoType.equals("AppConfigXml")) {
+			dao = new AppConfigXML();
+		} else {
+			dao = new GeneralXML();
+		}
+		return dao;
+	}
+}
+
+class DBDaoFactory implements IDaoFactory {
+	public IDao getDao(String DaoType) {
+		IDao dao = null;
+		if (DaoType.equals("SqlServer")) {
+			dao = new SqlServer();
+		} else if (DaoType.equals("MySql")) {
+			dao = new MySql();
+		} else if (DaoType.equals("PostGresSql")) {
+			dao = new PostGresSql();
+		} else {
+			new throw("Unidentified dao type");
+		}
+		return dao;
+	}
+}
+
+// Here AppConfigXML, GeneralXML, SqlServer, MySql, PostGresSql are different types of daos implements IDao interface
+
+
+main() {
+	IDao dao = DaoFactoryProducer.produce("db")
+					.getDao("MySql");
+	dao.readAll();
+	dao.set();
+	...
+}

@@ -1,0 +1,28 @@
+Template Design Pattern
+
+The template method pattern is a behavioural pattern. And as the name itself says it provides a base template method. 
+When we are working with inheritance in our applications we provide a base template method that should be used by the child classes. The child classes can override certain methods but they should use the base template method as is.
+
+public abstract class DataRenderer{
+	public void render(){
+		String data = readData();
+		String processedData = processData(data);
+		System.out.println(processedData);
+	}
+	public abstract String readData();
+	public abstract String processData(String data);
+}
+
+class XMLDataRenderer extends DataRenderer {
+	public string readData() {
+		// some way to read data from xml files
+	}
+
+	public string processData(data) {
+		// specific way to process the read data
+	}
+}
+
+main() {
+	new XMLDataRenderer().render();	// will render the read and processed data to default system output.
+}

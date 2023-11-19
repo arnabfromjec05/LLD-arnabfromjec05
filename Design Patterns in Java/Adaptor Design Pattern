@@ -1,0 +1,33 @@
+Adaptor Design Pattern
+
+If you have used a power adapter then you already know what an adapter pattern is .The job of a power adapter is to adapt it to a particular location and a particular switchboard.For example the same laptop plug pins that work in USA will not work in UK and in India. We will have to use appropriate power adapter that can take our laptop pins into it and on the other side of it it will have pins that can go into the local countries switchboard and it can also adapt to the appropriate range in that country.
+
+For example:
+here we have a WeatherFinder class which has a findWeather. By passing in a city you can get the weather and we have an implementation of it which will return the weather back and there is a UI class that wants to use the weather finder . But the UI only knows the zip code of the city. It does not have the city information it only has the zip code but it wants to get the weather of it.
+
+That is where an adapter comes in. We will implement an adapter which will take the zip code. The weather UI will invoke the findTemperature Method on the WeatherAdapter it will pass in the zip code. The weather adapter is responsible for looking up for the appropriate city that matches the zip code and hen invoke the weather finder, take the results and return the results back to the weather UI. So it exactly acts like a power adapter. It takes the inputs from the class that wants to use another class because the inputs here are different from what the other side of the relationship expects.
+
+
+UML:
+
+IWeatherFinder 							WeatherAdaptor								WeatherUI
+	+ find(String city): int  	<---	+ findTemperature(int zipCode): int	 <---	+ find(int zipCode): int
+	^
+	|
+WeatherFinderImpl
+
+
+
+public class WeatherAdapter {
+	public int findTemperature(int zipCode) {
+		String city = null;
+		if (zipCode == 19406) {
+			city = "King Of Prussia";
+			// alternatively, WeatherAdaptor can have a map<city, List<PinCodes>>, which can be looked into.
+		}
+
+		WeatherFinder finder = new WeatherFinderImpl();
+		int temperature = finder.find(city);
+		return temperature;
+	}
+}

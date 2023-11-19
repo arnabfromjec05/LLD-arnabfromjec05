@@ -1,0 +1,45 @@
+Factory Design Pattern
+
+A creational design pattern that abstracts or hides the object creation process.
+
+When you think of factory you can think of a car factory a chocolate factory or a toy factory.A car factory is responsible for manufacturing the cars .A car dealer need not worry about how the car is manufactured. He simply asks the car factory to deliver him some cars. The car factory is responsible for manufacturing them and delivering them to the dealer.
+
+Similarly the Chocolate Factory delivers different types of chocolates based on what the chocolate store asks them to deliver.
+
+Real world ex: 
+
+JDBC Driver manager is passed with only the 'ConnectionString' of the database instance it should connect to. 
+DriverManager.getDriver("<connectionString>") returns IDatabaseDriver type which can be:
+											-> MySqlDriver
+											-> OracleDriver
+											-> PostgressSqlDriver etc depending on the connection string.
+then these drivers can be used to do actual DB operations.
+
+interface IDatabaseDriver {
+	addRecord(Record);
+	getAllRecords();
+	updateRecord(id, Record);
+	deleteRecord(Record);
+}
+
+Another example: is a pizza store .A pizza store delivers different types of pizzas.We will a parent interface which is implemented by the veg pizza cheese pizza and meat pizza.The pizza store need not worry about how to create each of these pizzas.It simply asked the pizza factory to deliver the type of pizza it wants or to create a type of pizza it wants.so that it can give it to the customer or it can deliver it to the customer.The pizza factory hides the complexity of creating the different types of pizzas from the pizza store.
+
+
+Sample Code:
+
+public class PizzaFactory {
+	public static Pizza createPizza(String type) {
+		Pizza p = null;
+		if (type.equals("cheese")) {
+			p = new CheesePizza();
+		} else if (type.equals("chicken")) {
+			p = new ChickenPizza();
+		} else if (type.equals("veggie")) {
+			p = new VeggiePizza();
+		}
+		return p;
+	}
+}
+
+
+
