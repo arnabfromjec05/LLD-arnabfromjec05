@@ -14,7 +14,7 @@ Here person is the client remote control is the Invoker command is the command i
 
 The person need not touch the television or he need not know how to perform the on and off command he simply uses the remote control and presses the button the remote control also doesn't care how the actions are performed. It simply passes the command to the television. That way they are completely decoupled the invoker does not know the details of the action that needs to be performed.
 
-The receiver here the television can change the implementation of how the on and off should be performed without impacting the remote control and the person.
+The receiver here the television can change the implementation of how the on and off should be performed without impacting the remote control and the person. So remote control(invoker) is completely de-coupled from the receiver.
 
 public class RemoteControl{
 	private Command command;
@@ -22,3 +22,14 @@ public class RemoteControl{
 		command.execute();
 	}
 }
+
+Be
+
+UML: 
+
+client -> Invoker -> 	 Command  	-> Television 
+
+						|		|	
+						v 		v
+
+					OnCommand  OffCommand

@@ -1,2 +1,4 @@
 FlyWeight Design Pattern
 
+- Goal is to reduce the number of objects created
+- Mobile application has very limited memory
