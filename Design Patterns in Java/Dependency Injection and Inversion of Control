@@ -1,0 +1,15 @@
+Dependency Injection and Inversion of Control
+
+- If a class A has has-a relationship with class B object, it needs class B object for it to be instantiated.
+- This can be achieved by passing it from constructors, setters etc.
+- Spring provides this inherent capability of first creating the class B object and then injecting it to Class A's instance. This is known as dependency injection.
+- Mechanism is also known as Inversion of control.
+
+
+A
+|
+v
+ConcreteA  ---- has-a ----> B
+							|
+							v
+							ConcreteB

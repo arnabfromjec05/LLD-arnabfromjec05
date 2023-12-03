@@ -19,6 +19,7 @@ GOF Patterns
 	Flyweight
 	Decorator
 	Proxy
+	Facade
 
 -> Behavioral patterns : How communication between classes and objects
 	Command
