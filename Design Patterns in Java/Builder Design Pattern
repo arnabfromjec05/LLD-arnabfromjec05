@@ -1,0 +1,13 @@
+Builder Design Pattern
+
+- Builder pattern aims to “Separate the construction of a complex object from its representation so that the same construction process can create different representations.” It is used to construct a complex object step by step and the final step will return the object. 
+- The process of constructing an object should be generic so that it can be used to create different representations of the same object.
+- In layman terms:- Whenever there is unnecessary many arguments passed, which are not actually required, to a constructor for creating, it leads to cluttering the code and reduces readability with code redundancy. We can solve this problem by refactoring into Builder pattern. It uses as many arguments required on the fly and in final step create the resultant object.
+
+- Ex: In HttpClient diff properties like:
+	- httpMethod
+	- uri
+	- header
+	- body
+	- authToken etc are used.
+	But not all property may be required everytime to build the object. Like in GET (httpMethod) calls, body can be optional.

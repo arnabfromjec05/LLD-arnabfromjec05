@@ -1,0 +1,9 @@
+Facade Design Pattern
+
+- It's a structural design pattern to hide the complexities of the system.
+- Facade layer acts as a layer intermediate between client and the system, and it's responsible for calling the system components/methods/classes etc one by one whenever client calls a request.
+
+
+Client -> Facade -> 1) CheckStock
+					2) PlaceOrder
+					3) ShipOrder
