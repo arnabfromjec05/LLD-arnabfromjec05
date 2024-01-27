@@ -1,0 +1,27 @@
+Thread:
+A thread is an independent sequential path of execution within a program.
+
+Main thread:
+When a standalone application is run, a user thread is automatically created to execute the main() method of the
+application. This thread is called the main thread.
+
+- From the main thread we can spin up multiple parallel threads sharing the same global address space but having it's
+own local scope (function scope) as well.
+
+- The main() method can finish first, but the program will keep running until all 'user threads' have completed.
+
+- There is something called as daemon thread too. Any user thread can be marked as daemon thread using setDaemon(boolean)
+method, but this must be done before the thread is started. The program completion doesn't depend upon the daemon thread
+execution, which is left at mercy of the runtime system (OS).
+
+- Only if the process gets terminated, all the child threads of that process also dies. ex:- Google chrome has multiple
+tabs (threads) which also get killed if the chrome process is killed.
+
+Thread creation is achieved in one of the two ways:
+1. Implementing the java.lang.Runnable interface and pass this object to Thread class instance
+2. Extending the java.lang.Thread class
+
+Note: 1st method is preferred as it allows the subclass implementing Runnable interface to extend from any other class
+too, which is constrained in 2nd method as once we extend from Thread class, we can't extend from any other class (as
+java don't support multiple inheritance).
+
