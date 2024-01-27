@@ -24,4 +24,3 @@ Thread creation is achieved in one of the two ways:
 Note: 1st method is preferred as it allows the subclass implementing Runnable interface to extend from any other class
 too, which is constrained in 2nd method as once we extend from Thread class, we can't extend from any other class (as
 java don't support multiple inheritance).
-

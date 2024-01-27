@@ -1,0 +1,14 @@
+Thread synchronization:
+Since threads shares the common address space of the process, often times it's intended that only one thread
+accesses the shared memory location. This can be achieved by thread synchronization.
+ex:- in Booking movie tickets or train tickets, the seat availability variable is updated once the thread completes
+the booking, meanwhile other threads shouldn't be allowed to update the seat availability as it's a critical section
+and scenario can lead to race conditions.
+
+1. synchronized(Object obj) - Used to lock a given code block.
+2. defining function as synchronized -
+public synchronized boolean func() {} -> here it means synchronized(this) over the entire func() block
+for static methods: synchronized will boil down to synchronized(<className>.class)
+
+- If a function is defined as synchronized in a class, it's derived class may or mayn't retain the synchronized attribute
+of the overridden method.
