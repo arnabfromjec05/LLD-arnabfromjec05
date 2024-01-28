@@ -17,10 +17,23 @@ execution, which is left at mercy of the runtime system (OS).
 - Only if the process gets terminated, all the child threads of that process also dies. ex:- Google chrome has multiple
 tabs (threads) which also get killed if the chrome process is killed.
 
-Thread creation is achieved in one of the two ways:
+- Thread creation is achieved in one of the two ways:
 1. Implementing the java.lang.Runnable interface and pass this object to Thread class instance
 2. Extending the java.lang.Thread class
 
 Note: 1st method is preferred as it allows the subclass implementing Runnable interface to extend from any other class
 too, which is constrained in 2nd method as once we extend from Thread class, we can't extend from any other class (as
 java don't support multiple inheritance).
+
+- Thread states:
+New -> ReadyToRun -> Running -> Completed/Terminated
+          ^             |
+          |             v
+          |             Non-runnable states
+          |          1. Waiting - <on-notification> -> Blocked for lock acq
+          | - - - -  2. Sleeping
+                     3. Blocked for i/o
+                     4. Blocked for join completion
+
+- Thread Join, Thread getPriority(), Thread setPriority()
+- Thread scheduling: Non-preemptive, Preemptive, Round-robin

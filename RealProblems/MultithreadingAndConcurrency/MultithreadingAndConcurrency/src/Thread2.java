@@ -1,3 +1,6 @@
+/**
+ * By implementing runnable interface
+ */
 public class Thread2 implements Runnable{
 
     @Override

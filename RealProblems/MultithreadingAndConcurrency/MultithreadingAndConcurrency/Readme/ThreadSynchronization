@@ -5,6 +5,7 @@ ex:- in Booking movie tickets or train tickets, the seat availability variable i
 the booking, meanwhile other threads shouldn't be allowed to update the seat availability as it's a critical section
 and scenario can lead to race conditions.
 
+synchronized (used for mutex in java) -->
 1. synchronized(Object obj) - Used to lock a given code block.
 2. defining function as synchronized -
 public synchronized boolean func() {} -> here it means synchronized(this) over the entire func() block
@@ -12,3 +13,23 @@ for static methods: synchronized will boil down to synchronized(<className>.clas
 
 - If a function is defined as synchronized in a class, it's derived class may or mayn't retain the synchronized attribute
 of the overridden method.
+
+wait notify and notifyAll -->
+- lockObject.wait(): all threads move to waiting state untill notify() or notifyAll() called on the locking object
+- lockObject.notify(): only one thread currently in waiting state will be awakened to go to block state.
+- lockObject.notifyAll(): all the waiting threads on the lockObject will be awakened to go to block state.
+
+Note: Thread in block state (block for acquisition) don't directly go to runnable state, they should compete to
+reacquire the lock to move to runnable state.
+
+binary semaphore and counting semaphore -->
+- Semaphore obj = new Semaphore(0): initializes a semaphore object with value 0.
+    - acquire(): obj.acquire() reduces the value of semaphore obj by 1. Blocking operation if value is currently 0.
+    - release(): obj.release() increases the value of semaphore obj by 1. Non blocking operation.
+    - semaphore object value if controlled between 0 or 1 is a binary semaphore and can work as mutex locks.
+    - if value of this > 1 , it's a counting semaphore. Used to control access to limited set of non binary resources.
+
+Deadlock:
+It's a situation in multithreaded envt where one thread is holding resource A and waiting to acquire resource B, while
+at the same time another thread is holding resource B and waiting to acquire resource A. When such cyclic dependency happens
+at any state of the system, it leads to deadlock.
