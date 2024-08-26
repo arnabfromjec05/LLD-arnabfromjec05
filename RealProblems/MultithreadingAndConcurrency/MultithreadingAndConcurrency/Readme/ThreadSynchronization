@@ -15,7 +15,7 @@ for static methods: synchronized will boil down to synchronized(<className>.clas
 of the overridden method.
 
 wait notify and notifyAll -->
-- lockObject.wait(): all threads move to waiting state untill notify() or notifyAll() called on the locking object
+- lockObject.wait(): all threads move to waiting state until notify() or notifyAll() called on the locking object
 - lockObject.notify(): only one thread currently in waiting state will be awakened to go to block state.
 - lockObject.notifyAll(): all the waiting threads on the lockObject will be awakened to go to block state.
 
@@ -33,3 +33,11 @@ Deadlock:
 It's a situation in multithreaded envt where one thread is holding resource A and waiting to acquire resource B, while
 at the same time another thread is holding resource B and waiting to acquire resource A. When such cyclic dependency happens
 at any state of the system, it leads to deadlock.
+
+Volatile keyword use:
+- Volatile keyword is yet another way (like synchronized) of making class thread-safe. Thread-safe means that a method
+or class instance can be used by multiple threads at the same time without any problem.
+- Volatile keyword tells the compiler to not store the value in threads local cache and always to read write from memory
+to ensure consistency of value seen by other threads.
+In BlockingQueue we used volatile specifier for Queue to tell that Queue's value will not be stored in local cache of
+the thread anytime.

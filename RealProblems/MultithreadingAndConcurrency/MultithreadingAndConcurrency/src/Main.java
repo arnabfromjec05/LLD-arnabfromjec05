@@ -1,8 +1,6 @@
-import java.util.*;
-
 public class Main {
     public static void main(String[] args) {
-        testMultithreading();
+        //testMultithreading();
         testBlockingQueue();
 
         // Uncomment below to see deadlock situation.
@@ -11,13 +9,42 @@ public class Main {
 
     private static void testBlockingQueue() {
         BlockingQueue queue = new BlockingQueue(1);
-        for (int i=0; i<50; i++) {
-            Thread producer1 = new Thread(() -> queue.write(1), "P1");
-            Thread producer2 = new Thread(() -> queue.write(2), "P2");
-            Thread consumer1 = new Thread(() -> queue.read(), "C1");
-            Thread consumer2 = new Thread(() -> queue.read(), "C2");
+
+        // creating 3 producers, 2 consumers
+        Thread producer1 = new Thread(() -> {
+            while(true) {
+                queue.write(1);
+            }
+        }, "P1");
+
+        Thread producer2 = new Thread(() -> {
+            while(true) {
+                queue.write(2);
+            }
+        }, "P2");
+
+        Thread producer3 = new Thread(() -> {
+            while(true) {
+                queue.write(3);
+            }
+        },  "P3");
+
+        Thread consumer1 = new Thread(() -> {
+            while(true) {
+                queue.read();
+            }
+        }, "C1");
+
+        Thread consumer2 = new Thread(() -> {
+            while(true) {
+                queue.read();
+            }
+        }, "C2");
+
+        while(true) {
             producer1.start();
             producer2.start();
+            producer3.start();
             consumer1.start();
             consumer2.start();
         }
@@ -25,10 +52,10 @@ public class Main {
 
     private static void testMultithreading() {
         System.out.println("Main thread started");
-        Thread thread1 = new Thread1("Thread1");
+        Thread thread1 = new ThreadImpl1("Thread1");
         thread1.start();
 
-        Thread thread2 = new Thread(new Thread2(), "Thread2");
+        Thread thread2 = new Thread(new ThreadImpl2(), "Thread2");
         thread2.start();
 
         // initialize thread using lambda
@@ -52,6 +79,9 @@ public class Main {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        Thread thread4 = new Thread(new ThreadImpl3(), "Thread4");
+        thread4.start();
 
         System.out.println("Main thread finished");
     }

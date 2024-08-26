@@ -4,6 +4,7 @@ import java.util.List;
 /**
  * Solving Producer-Consumer problem using a blocking queue.
  * Blocking queue lets only one producer or a consumer to simultaneously access the queue for writes/reads.
+ * It's also called as Pub-Sub problem.
  */
 public class BlockingQueue {
     private volatile List<Integer> queue;

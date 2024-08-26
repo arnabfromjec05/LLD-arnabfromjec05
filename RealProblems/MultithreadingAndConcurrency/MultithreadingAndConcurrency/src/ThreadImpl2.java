@@ -1,11 +1,7 @@
 /**
- * By extending thread class.
+ * By implementing runnable interface
  */
-public class Thread1 extends Thread {
-
-    public Thread1(String name) {
-        super(name);
-    }
+public class ThreadImpl2 implements Runnable{
 
     @Override
     public void run() {
