@@ -1,7 +1,8 @@
 public class Main {
     public static void main(String[] args) {
         //testMultithreading();
-        testBlockingQueue();
+//        testBlockingQueue();
+        new PrintNNumbersUsingTwoThreads(2).startPrinting();
 
         // Uncomment below to see deadlock situation.
         // testDeadlock();
