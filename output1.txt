@@ -1,0 +1,5 @@
+[MessageSent] Sender: user1 to Receiver: user2 = Hello!
+[MessageSent] Sender: user2 to Receiver: user3 = Hello!
+[MessageSent] Sender: user2 to Receiver: user1 = Hi!
+[MessageSent] Sender: user2 to Receiver: user3 = There!
+Either sender or receiver not found
