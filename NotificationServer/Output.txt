@@ -1,0 +1,17 @@
+Listing all notifications in state: 0---->
+NotificationId: 1 CurrentBTCPrice: 10 MarketTradeVolume: 10 IntradayHighPrice: 10 MarketCap: 10 Notification Status: 0
+Listing all notifications in state: 0---->
+NotificationId: 1 CurrentBTCPrice: 10 MarketTradeVolume: 10 IntradayHighPrice: 10 MarketCap: 10 Notification Status: 0
+NotificationId: 2 CurrentBTCPrice: 20 MarketTradeVolume: 20 IntradayHighPrice: 20 MarketCap: 20 Notification Status: 0
+Listing all notifications in state: 0---->
+NotificationId: 1 CurrentBTCPrice: 10 MarketTradeVolume: 10 IntradayHighPrice: 10 MarketCap: 10 Notification Status: 0
+NotificationId: 2 CurrentBTCPrice: 20 MarketTradeVolume: 20 IntradayHighPrice: 20 MarketCap: 20 Notification Status: 0
+NotificationId: 3 CurrentBTCPrice: 30 MarketTradeVolume: 30 IntradayHighPrice: 30 MarketCap: 30 Notification Status: 0
+Listing all notifications in state: 0---->
+NotificationId: 3 CurrentBTCPrice: 30 MarketTradeVolume: 30 IntradayHighPrice: 30 MarketCap: 30 Notification Status: 0
+Listing all notifications in state: 1---->
+NotificationId: 1 CurrentBTCPrice: 10 MarketTradeVolume: 10 IntradayHighPrice: 10 MarketCap: 10 Notification Status: 1
+Listing all notifications in state: 2---->
+NotificationId: 2 CurrentBTCPrice: 20 MarketTradeVolume: 20 IntradayHighPrice: 20 MarketCap: 20 Notification Status: 2
+Listing all notifications in state: 2---->
+Notification is not found
