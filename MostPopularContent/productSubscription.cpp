@@ -45,19 +45,20 @@ enum Plan {
 };
 
 class PlanPrices {
-    map<Plan, double> planPrices;
+    static map<Plan, double> planPrices;
     public:
-        PlanPrices(map<Plan, double> planPrices) {
-            this->planPrices = planPrices;
+        static void initPlanPrices(map<Plan, double> planPrices) {
+            PlanPrices::planPrices = planPrices;
         }
 
-        double getPriceForPlan(Plan plan) {
+        static double getPriceForPlan(Plan plan) {
             if (planPrices.find(plan) == planPrices.end()) {
-                throw "didn't find the plan price";
+                throw std::runtime_error("Plan price not found");
             }
             return planPrices[plan];
         }
 };
+map<Plan, double> PlanPrices::planPrices;
 
 class ProductSubscription {
     string productName;
@@ -106,11 +107,11 @@ class Customer {
             this->productSubs = prodcutSubs;
         }
 
-        vector<double> getMonthlyCostList(PlanPrices* planPrices) {
+        vector<double> getMonthlyCostList() {
             vector<double> prefixSum(12, 0);
             for(auto ps: productSubs) {
                 Plan planId = ps->getPlanId();
-                double priceForPlan = planPrices->getPriceForPlan(planId);
+                double priceForPlan = PlanPrices::getPriceForPlan(planId);
                 prefixSum[ps->getSubscribedMonth() - 1] += priceForPlan;
             }
             for(int i=1; i<12; i++) {
@@ -122,13 +123,13 @@ class Customer {
 
 class CostExplorer {
     public:
-        vector<double> monthlyCostList(Customer* customer, PlanPrices* planPrices) {
-            return customer->getMonthlyCostList(planPrices);
+        vector<double> monthlyCostList(Customer* customer) {
+            return customer->getMonthlyCostList();
         }
 
-        double annualCost(Customer* customer, PlanPrices* planPrices) {
+        double annualCost(Customer* customer) {
             double annualCost = 0;
-            for(auto monthCost: customer->getMonthlyCostList(planPrices)) {
+            for(auto monthCost: customer->getMonthlyCostList()) {
                 annualCost += monthCost;
             }
             return annualCost;
@@ -136,7 +137,7 @@ class CostExplorer {
 };
 
 int main() {
-    PlanPrices* planPrices = new PlanPrices(
+    PlanPrices::initPlanPrices(
         {
             {Plan::BASIC, 9.99},
             {Plan::STANDARD, 49.99},
@@ -164,16 +165,16 @@ int main() {
     
     // Monthly cost list for c1
     cout<<"(c1) Monthly cost: ";
-    for (auto costPerMonth: ce->monthlyCostList(c1, planPrices)) {
+    for (auto costPerMonth: ce->monthlyCostList(c1)) {
         cout<<costPerMonth<<", ";
     }
-    cout<<"Annual cost: "<<ce->annualCost(c1, planPrices)<<endl;
+    cout<<"Annual cost: "<<ce->annualCost(c1)<<endl;
 
     // Monthly cost list for c2
     cout<<"(c2) Monthly cost: ";
-    for (auto costPerMonth: ce->monthlyCostList(c2, planPrices)) {
+    for (auto costPerMonth: ce->monthlyCostList(c2)) {
         cout<<costPerMonth<<", ";
     }
-    cout<<"Annual cost: "<<ce->annualCost(c2, planPrices)<<endl;
+    cout<<"Annual cost: "<<ce->annualCost(c2)<<endl;
     return 0;
 }
