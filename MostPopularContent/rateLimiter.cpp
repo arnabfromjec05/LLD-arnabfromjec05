@@ -141,14 +141,14 @@ int main() {
     cout<<rl1->rateLimit(1, 3)<<endl;
     cout<<rl1->rateLimit(2, 1)<<endl;    
 
-    rl1->refillBuckets();
+    rl1->refillBuckets();  //at time=5
     cout<<rl1->rateLimit(1, 6)<<endl;
     cout<<rl1->rateLimit(2, 6)<<endl;
     cout<<rl1->rateLimit(2, 6)<<endl;
     cout<<rl1->rateLimit(2, 7)<<endl;
     cout<<rl1->rateLimit(2, 7)<<endl;
 
-    rl1->refillBuckets();
+    rl1->refillBuckets();  //at time=10
     cout<<rl1->rateLimit(1, 11)<<endl;
     cout<<rl1->rateLimit(1, 11)<<endl;
     cout<<rl1->rateLimit(1, 12)<<endl;
