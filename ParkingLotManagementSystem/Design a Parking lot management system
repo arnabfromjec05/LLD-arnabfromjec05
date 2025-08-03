@@ -1,0 +1,149 @@
+Design a parking lot system that can handle different types of vehicles (e.g., cars, motorcycles, and buses). Think of all functional requirements. Create entities required, relationships between them. The system should be able to:
+1. Park vehicles based on some Parking Strategy
+2. Retrieve vehicles.
+3. Keep track of parking space availability.
+4. Remove/UnPark the Vehicles
+
+
+Entities:-
+
+ParkingLot - Composition of Slot
+Slot - floorNum, indexX, indexY 
+Vehicle - numberPlate, type, color
+
+ParkingLotSystem
+	- Park(Vehicle, Strategy)
+	- Unpark(Slot) 
+	- Retrieve(Vehicle)
+
+
+
+class ParkingLot {
+	vector<Slot*> slots;
+	public:
+		ParkingLot(numFloors, numSlotsRowsPerFloor, numSlotsColumnsPerFloor) {
+			for(int i=1; i<=numFloors; i++) {
+				for (int j=1; j<=numRowsPerFloor; j++) {
+					for (int k=1; k<=numColumnsPerFloor; k++) {
+						slots.push_back(new Slot(i, j, k));
+					}
+				}
+			}
+		}
+}
+
+class Slot {
+	int floorNum;
+	int rowNum;
+	int colNum;
+	bool isEmpty = true;
+
+	public:
+
+		Slot(int fNum, int rNum, int cNum) {
+			floorNum = fNum;
+			rowNum = rNum;
+			colNum = cNum;
+			isEmpty = true;
+		}
+
+		bool getIsEmpty() {
+			return isEmpty;
+		}
+
+		void setIsEmpty(bool isEmpty) {
+			this->isEmpty = isEmpty;
+		}
+}
+
+enum VEHICLE_TYPE {
+	TWO;
+	FOUR;
+	HEAVY;
+}
+
+class Vehicle {
+	string plateNum;
+	VEHICLE_TYPE type;
+	Slot* slot;
+}
+
+interface ParkingStrategy {
+	Slot getSlot(Vehicle);
+}
+
+class FirstEmptyFloorStrategy: ParkingSrategy {
+	public:
+		Slot* getSlot(ParkingLot* pl) {
+			// gets first empty floor slot and returns it.
+		}
+}
+
+class MaxEmptySlotFloorStrategy: ParkingSrategy {
+	public:
+		Slot* getSlot(ParkingLot* pl) {
+			// gets max empty floor slot and returns it.
+		}
+}
+
+enum PARKING_STRATEGY {
+	FIRST_EMPTY;
+	MAX_EMPTY_SLOTS;
+}
+
+class ParkingLotStrategyFactory {
+	static ParkingStrategy getStrategy(STRAT strategy) {
+		switch (strategy) {
+			case FIRST_EMPTY: 
+				return new FirstEmptyFloorStrategy();
+			case MAX_EMPTY_SLOTS:
+				return new MaxEmptySlotFloorStrategy();
+			default:
+				throw new Exception("Undefined strategy");
+		}
+	}
+}
+
+
+class ParkingLotSystem {
+
+	ParkingLot parkingLot;
+	
+public:
+
+	void initializeParkingLot(numFloors, numSlotsRowsPerFloor, numSlotsColumnsPerFloor) {
+	 	parkingLot = new ParkingLot(numFloors,
+	 		numSlotsRowsPerFloor,
+	 		numSlotsColumnsPerFloor);
+	}
+
+	//strategy: is sent by caller like ParkingLotManager after chking with customer about which parking strategy they want to opt for this parking.
+	Slot* Park(vehicle, strategy) {	
+		lock() {
+			Slot* slot = strategy.getSlot(this->parkingLot);
+			vehicle->slot = slot;
+			slot->setIsEmpty(false);
+		}
+		return slot;
+	}
+
+	bool Unpark(vehicle) {
+		Slot* slot = vehicle->getSlot();
+		slot->setIsEmpty(true);
+		return true;
+	}
+
+	Slot* Retrieve(vehicle) {
+		return vehicle->getSlot();
+	}
+}
+
+
+
+
+
+
+
+
+
+
