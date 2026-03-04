@@ -173,60 +173,48 @@ class Match {
             cin>>numPlayersEachTeam;
             cout<<"Num of overs: ";
             cin>>numOvers;
-            string playerName;
 
             team1 = new Team(1);
             cout<<"Batting order for team1: ";
-            for (int i=0; i<numPlayersEachTeam; i++) {
-                cin>>playerName;
-                team1->addPlayer(playerName);
-            }
-
-            // overs for team1
-
-            for (int i=0; i<numOvers; i++) {
-                cout<<"Over"<<i+1<<":"<<endl;
-                int numBallsThrown = 0;
-                while(!team1->isAllOut() && numBallsThrown < 6) {
-                    string run;
-                    cin>>run;
-                    if (run == "Wd" || run == "Nb") {
-                        team1->processRun(strToRun[run]);
-                        continue;
-                    }
-                    team1->processRun(strToRun[run]);
-                    numBallsThrown++;
-                }
-                team1->processOver(numBallsThrown);
-                team1->printScoreCard();
-            }
+            getBattingOrder(team1);
+            getRuns(team1);
 
             team2 = new Team(2);
             cout<<"Batting order for team2: ";
+            getBattingOrder(team2);
+            getRuns(team2);
+
+            announceWinner();
+        }
+
+        void getBattingOrder(Team* team) {
+            string playerName;
             for (int i=0; i<numPlayersEachTeam; i++) {
                 cin>>playerName;
-                team2->addPlayer(playerName);
+                team->addPlayer(playerName);
             }
+        }
 
-            // overs for team2
+        void getRuns(Team* team) {
             for (int i=0; i<numOvers; i++) {
                 cout<<"Over"<<i+1<<":"<<endl;
                 int numBallsThrown = 0;
-                while(!team2->isAllOut() && numBallsThrown < 6) {
+                while(!team->isAllOut() && numBallsThrown < 6) {
                     string run;
                     cin>>run;
                     if (run == "Wd" || run == "Nb") {
-                        team2->processRun(strToRun[run]);
+                        team->processRun(strToRun[run]);
                         continue;
                     }
-                    team2->processRun(strToRun[run]);
+                    team->processRun(strToRun[run]);
                     numBallsThrown++;
                 }
-                team2->processOver(numBallsThrown);
-                team2->printScoreCard();
+                team->processOver(numBallsThrown);
+                team->printScoreCard();
             }
+        }
 
-            // final winner announcement
+        void announceWinner() {
             int winnerTeamId = team1->totalScore > team2->totalScore
                 ? team1->teamId
                 : team2->teamId;
